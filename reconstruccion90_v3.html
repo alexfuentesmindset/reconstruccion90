@@ -3,281 +3,475 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reconstrucción 90 - Alex Martínez</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<title>Reconstrucción 90 — Alex Fuentes</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #000; color: #fff; font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 1.6; }
-  .page { max-width: 480px; margin: 0 auto; }
+
+  :root {
+    --black: #0d0d0d;
+    --white: #f5f2ed;
+    --accent: #c8a96e;
+    --accent-dark: #a8893e;
+    --gray-1: #1a1a1a;
+    --gray-2: #2a2a2a;
+    --gray-3: #444;
+    --gray-text: #999;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,169,110,0.15);
+  }
+  .nav-brand { font-family: var(--serif); font-size: 1.1rem; color: var(--accent); letter-spacing: 0.02em; }
+  .nav-cta {
+    background: var(--accent); color: var(--black);
+    padding: 0.5rem 1.25rem; border-radius: 2px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent-dark); color: var(--white); }
 
   /* HERO */
-  .hero { background: #000; text-align: center; padding: 2.5rem 1.5rem 2rem; border-bottom: 3px solid #E89A3C; }
-  .hero-logo { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 0.25em; color: #E89A3C; text-transform: uppercase; margin-bottom: 1.5rem; }
-  .hero-title { font-family: 'Oswald', sans-serif; font-size: 42px; line-height: 1.05; text-transform: uppercase; color: #fff; margin-bottom: 0.5rem; }
-  .hero-title .accent { color: #E89A3C; font-style: italic; }
-  .hero-title .red { color: #E03030; }
-  .hero-sub { font-size: 15px; color: #ccc; margin-bottom: 1.75rem; max-width: 340px; margin-left: auto; margin-right: auto; }
-  .btn-main { display: block; width: 100%; background: #1877F2; color: #fff; font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 18px 24px; border: none; cursor: pointer; text-decoration: none; border-radius: 4px; margin-bottom: 0.5rem; }
-  .btn-main:hover { background: #1565c0; }
-  .btn-hint { font-size: 12px; color: #888; text-align: center; margin-top: 0.4rem; }
-
-  section { padding: 2.5rem 1.5rem; }
-  section + section { border-top: 1px solid #1a1a1a; }
-
-  /* STORY */
-  .story { background: #000; font-size: 15px; color: #ddd; line-height: 1.8; }
-  .story p { margin-bottom: 1.1rem; }
-  .story .bold { color: #E89A3C; font-weight: 600; }
-  .story .highlight { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-  .story .red-text { color: #E03030; font-weight: 600; }
-  .story .big-close { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1.5rem; }
-
-  /* PROBLEMS */
-  .problems { background: #000; }
-  .section-title { font-family: 'Oswald', sans-serif; font-size: 32px; font-weight: 700; text-transform: uppercase; color: #fff; text-align: center; margin-bottom: 2rem; line-height: 1.1; }
-  .problem-item { margin-bottom: 2rem; }
-  .problem-label { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.5rem; }
-  .prob-icon { background: #E89A3C; color: #000; font-size: 13px; font-weight: 700; width: 24px; height: 24px; min-width: 24px; display: flex; align-items: center; justify-content: center; border-radius: 3px; margin-top: 2px; }
-  .problem-label h3 { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; color: #fff; line-height: 1.2; }
-  .problem-desc { font-size: 14px; color: #bbb; line-height: 1.7; padding-left: 34px; }
-
-  /* INCLUDES */
-  .includes { background: #080808; }
-  .include-item { display: flex; flex-direction: column; align-items: center; margin-bottom: 1.75rem; text-align: center; }
-  .inc-icon { font-size: 28px; margin-bottom: 0.25rem; }
-  .inc-title { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; color: #fff; margin-bottom: 0.4rem; }
-  .inc-desc { font-size: 14px; color: #bbb; line-height: 1.7; max-width: 340px; }
-  .inc-value { font-size: 13px; color: #E89A3C; font-style: italic; margin-top: 0.25rem; }
-
-  /* CTA FINAL */
-  .cta-final { background: #000; text-align: center; padding: 3rem 1.5rem; border-top: 3px solid #E89A3C; }
-  .cta-final .section-title { margin-bottom: 1rem; }
-  .cta-final p { font-size: 15px; color: #ccc; margin-bottom: 1.75rem; line-height: 1.7; }
-  .btn-secondary { display: block; width: 100%; background: #1877F2; color: #fff; font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 20px 24px; border: none; cursor: pointer; text-decoration: none; border-radius: 4px; line-height: 1.2; }
-  .btn-secondary:hover { background: #1565c0; }
-  .btn-hint2 { font-size: 12px; color: #666; margin-top: 0.75rem; }
-
-  /* EBOOK DIVIDER */
-  .ebook-divider { background: #0d0d0d; border-top: 1px solid #222; border-bottom: 1px solid #222; padding: 2.5rem 1.5rem; text-align: center; }
-  .ebook-divider .tag { display: inline-block; background: #E89A3C; color: #000; font-family: 'Oswald', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; padding: 4px 14px; border-radius: 3px; margin-bottom: 1rem; text-transform: uppercase; }
-  .ebook-divider h2 { font-family: 'Oswald', sans-serif; font-size: 26px; color: #fff; text-transform: uppercase; margin-bottom: 0.5rem; line-height: 1.1; }
-  .ebook-divider p { font-size: 14px; color: #aaa; margin-bottom: 1.25rem; line-height: 1.7; }
-  .ebook-price { font-family: 'Oswald', sans-serif; font-size: 36px; color: #E89A3C; margin-bottom: 1.25rem; }
-  .ebook-price span { font-size: 16px; color: #888; text-decoration: line-through; margin-right: 8px; font-family: 'Open Sans', sans-serif; }
-  .btn-ebook { display: block; width: 100%; background: transparent; color: #E89A3C; font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; padding: 16px 24px; border: 2px solid #E89A3C; border-radius: 4px; cursor: pointer; text-decoration: none; letter-spacing: 0.05em; }
-  .btn-ebook:hover { background: #E89A3C; color: #000; }
-
-  footer { background: #000; text-align: center; padding: 1.5rem; font-size: 12px; color: #444; border-top: 1px solid #111; }
-
-  /* ===== POPUP ===== */
-  .popup-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.88);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-  }
-  .popup-overlay.active { display: flex; }
-  .popup-box {
-    background: #111;
-    border: 2px solid #E89A3C;
-    border-radius: 8px;
-    padding: 2rem 1.5rem;
-    max-width: 360px;
-    width: 100%;
-    text-align: center;
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 2rem 5rem;
+    max-width: 820px; margin: 0 auto;
     position: relative;
-    animation: popIn 0.3s ease;
   }
-  @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-  .popup-close { position: absolute; top: 12px; right: 16px; background: none; border: none; color: #666; font-size: 22px; cursor: pointer; line-height: 1; }
-  .popup-close:hover { color: #fff; }
-  .popup-tag { display: inline-block; background: #E89A3C; color: #000; font-family: 'Oswald', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; padding: 3px 12px; border-radius: 3px; margin-bottom: 0.75rem; text-transform: uppercase; }
-  .popup-title { font-family: 'Oswald', sans-serif; font-size: 24px; text-transform: uppercase; color: #fff; line-height: 1.1; margin-bottom: 0.75rem; }
-  .popup-title .gold { color: #E89A3C; }
-  .popup-desc { font-size: 13px; color: #bbb; line-height: 1.7; margin-bottom: 1.25rem; }
-  .popup-includes { text-align: left; margin-bottom: 1.25rem; }
-  .popup-includes li { font-size: 13px; color: #ddd; padding: 4px 0; list-style: none; display: flex; gap: 8px; align-items: flex-start; }
-  .popup-includes li::before { content: "✓"; color: #E89A3C; font-weight: 700; flex-shrink: 0; }
-  .popup-price { font-family: 'Oswald', sans-serif; font-size: 32px; color: #E89A3C; margin-bottom: 1rem; }
-  .popup-price .old { font-size: 15px; color: #666; text-decoration: line-through; margin-right: 6px; font-family: 'Open Sans', sans-serif; }
-  .btn-popup-buy { display: block; width: 100%; background: #E89A3C; color: #000; font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; padding: 15px 24px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; margin-bottom: 0.75rem; letter-spacing: 0.04em; }
-  .btn-popup-buy:hover { background: #d4891e; }
-  .popup-skip { font-size: 12px; color: #555; cursor: pointer; text-decoration: underline; }
-  .popup-skip:hover { color: #888; }
+  .hero-eyebrow {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+  .hero h1 {
+    font-family: var(--serif); font-size: clamp(2.8rem, 7vw, 5rem);
+    line-height: 1.1; font-weight: 400;
+    color: var(--white); margin-bottom: 1.5rem;
+  }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero-sub {
+    font-size: 1.1rem; color: #bbb; max-width: 540px;
+    margin-bottom: 2.5rem; line-height: 1.75;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    background: var(--accent); color: var(--black);
+    padding: 1rem 2rem; border-radius: 2px;
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent-dark); color: var(--white); transform: translateY(-1px); }
+  .btn-ghost {
+    color: var(--gray-text); font-size: 0.85rem;
+    text-decoration: none; border-bottom: 1px solid var(--gray-3);
+    padding-bottom: 2px; transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--white); }
+
+  /* DIVIDER */
+  .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(200,169,110,0.3), transparent); margin: 0; }
+
+  /* SECTION BASE */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 820px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--accent); }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400; line-height: 1.2; margin-bottom: 1.5rem;
+  }
+
+  /* IDENTIFICACIÓN */
+  .id-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(200,169,110,0.1); margin-top: 3rem; }
+  .id-item {
+    background: var(--black); padding: 2rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: background 0.2s;
+  }
+  .id-item:hover { background: var(--gray-1); }
+  .id-x { color: var(--accent); font-family: var(--serif); font-size: 1.5rem; flex-shrink: 0; margin-top: -2px; }
+  .id-text { font-size: 0.95rem; color: #ccc; line-height: 1.6; }
+
+  /* HISTORIA — PRUEBA SOCIAL */
+  .historia { background: var(--gray-1); }
+  .historia-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+  .historia-foto {
+    aspect-ratio: 3/4; background: var(--gray-2);
+    border: 1px solid rgba(200,169,110,0.2);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .historia-foto-placeholder {
+    font-family: var(--serif); font-size: 0.85rem; color: var(--gray-3);
+    text-align: center; padding: 1rem; line-height: 1.6;
+  }
+  .historia-content { padding-top: 0.5rem; }
+  .historia-quote {
+    font-family: var(--serif); font-size: 1.5rem; font-style: italic;
+    color: var(--accent); line-height: 1.4; margin-bottom: 2rem;
+  }
+  .historia-body { color: #bbb; font-size: 0.95rem; line-height: 1.8; }
+  .historia-body p { margin-bottom: 1rem; }
+  .historia-firma { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(200,169,110,0.2); }
+  .historia-firma strong { color: var(--white); font-size: 0.9rem; display: block; }
+  .historia-firma span { color: var(--gray-text); font-size: 0.8rem; }
+
+  /* PROGRAMA */
+  .programa-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .programa-item {
+    border: 1px solid rgba(200,169,110,0.15);
+    padding: 1.75rem; border-radius: 2px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .programa-item:hover { border-color: rgba(200,169,110,0.4); background: var(--gray-1); }
+  .programa-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+  .programa-item h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; color: var(--white); }
+  .programa-item p { font-size: 0.875rem; color: var(--gray-text); line-height: 1.6; }
+
+  /* PRECIO */
+  .precio { background: var(--gray-1); }
+  .precio-card {
+    border: 1px solid rgba(200,169,110,0.3);
+    padding: 3rem; max-width: 520px; margin: 3rem auto 0;
+    position: relative; text-align: center;
+  }
+  .precio-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: var(--black);
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 1rem;
+  }
+  .precio-nombre { font-family: var(--serif); font-size: 1.75rem; margin-bottom: 0.5rem; }
+  .precio-duracion { font-size: 0.8rem; color: var(--gray-text); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2rem; }
+  .precio-lista { list-style: none; text-align: left; margin-bottom: 2.5rem; }
+  .precio-lista li {
+    padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.9rem; color: #ccc;
+    display: flex; align-items: flex-start; gap: 0.75rem;
+  }
+  .precio-lista li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+  .precio-numero { font-family: var(--serif); font-size: 3.5rem; color: var(--accent); line-height: 1; margin-bottom: 0.25rem; }
+  .precio-usd { font-size: 0.8rem; color: var(--gray-text); margin-bottom: 2rem; }
+  .precio-nota { font-size: 0.75rem; color: var(--gray-3); margin-top: 1rem; }
+
+  /* PARA QUIÉN */
+  .paraquien-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+  .paraquien-si { border-left: 2px solid var(--accent); padding-left: 1.5rem; }
+  .paraquien-no { border-left: 2px solid var(--gray-3); padding-left: 1.5rem; }
+  .paraquien-titulo { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+  .paraquien-si .paraquien-titulo { color: var(--accent); }
+  .paraquien-no .paraquien-titulo { color: var(--gray-3); }
+  .paraquien-lista { list-style: none; }
+  .paraquien-lista li { font-size: 0.9rem; color: #bbb; padding: 0.4rem 0; line-height: 1.5; }
+
+  /* FINAL CTA */
+  .final-cta { text-align: center; padding: 7rem 2rem; }
+  .final-cta h2 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; margin-bottom: 1rem; line-height: 1.2; }
+  .final-cta h2 em { color: var(--accent); font-style: italic; }
+  .final-cta p { color: var(--gray-text); max-width: 400px; margin: 0 auto 2.5rem; font-size: 0.95rem; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--gray-2);
+    padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--gray-3);
+  }
+
+  /* POPUP EBOOK */
+  .popup-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    z-index: 1000; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .popup-overlay.active { opacity: 1; pointer-events: all; }
+  .popup-card {
+    background: var(--gray-1); border: 1px solid rgba(200,169,110,0.3);
+    padding: 2.5rem; max-width: 440px; width: 90%; position: relative;
+    transform: translateY(20px); transition: transform 0.3s;
+  }
+  .popup-overlay.active .popup-card { transform: translateY(0); }
+  .popup-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: none; border: none; color: var(--gray-text);
+    font-size: 1.2rem; cursor: pointer; line-height: 1;
+  }
+  .popup-close:hover { color: var(--white); }
+  .popup-title { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .popup-sub { font-size: 0.85rem; color: var(--gray-text); margin-bottom: 1.5rem; }
+  .popup-lista { list-style: none; margin-bottom: 2rem; }
+  .popup-lista li { font-size: 0.85rem; color: #bbb; padding: 0.35rem 0; display: flex; gap: 0.5rem; }
+  .popup-lista li::before { content: '✓'; color: var(--accent); }
+  .popup-precio { margin-bottom: 1.5rem; }
+  .popup-precio .tachado { text-decoration: line-through; color: var(--gray-3); font-size: 0.9rem; margin-right: 0.5rem; }
+  .popup-precio .real { font-family: var(--serif); font-size: 2rem; color: var(--accent); }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .historia-inner { grid-template-columns: 1fr; }
+    .historia-foto { display: none; }
+    .id-grid { grid-template-columns: 1fr; }
+    .programa-grid { grid-template-columns: 1fr; }
+    .paraquien-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * { animation: fadeUp 0.7s ease forwards; opacity: 0; }
+  .hero > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero > *:nth-child(4) { animation-delay: 0.55s; }
 </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- HERO -->
-  <div class="hero">
-    <p class="hero-logo">Alex Martínez · Mindset & Disciplina</p>
-    <h1 class="hero-title">
-      Deja de sabotearte.<br>
-      <span class="accent">Reconstrucción</span><br>
-      <span class="red">90</span>
-    </h1>
-    <p class="hero-sub">Para hombres y mujeres que ya saben lo que tienen que hacer... pero siguen sin hacerlo.</p>
-    <a href="https://wa.link/qf73k8" class="btn-main" id="btn-programa">QUIERO APLICAR AL PROGRAMA</a>
-    <p class="btn-hint">Sin compromiso — solo una plática de 15 min</p>
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">Alex Fuentes</span>
+  <a href="https://wa.link/qf73k8" class="nav-cta" target="_blank">Aplicar al programa</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Reconstrucción 90</p>
+  <h1>Deja de repetir<br>el ciclo.<br><em>Ya sabes que puedes.</em></h1>
+  <p class="hero-sub">Para hombres de 20 a 32 años que están hartos del caos — vicios, sin rumbo, sin dirección — y quieren un cuerpo, hábitos y claridad que duren.</p>
+  <div class="hero-actions">
+    <a href="https://wa.link/qf73k8" class="btn-primary" target="_blank">Quiero aplicar al programa</a>
+    <a href="#programa" class="btn-ghost">Ver qué incluye</a>
   </div>
-
-  <!-- VIDEO -->
-  <div style="background:#000;padding:1.5rem 1.5rem 0;">
-    <p style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:#E89A3C;text-align:center;margin-bottom:1rem;">Mira este video primero</p>
-    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;">
-      <iframe src="https://www.youtube.com/embed/lI9A9hTvxvM" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>
-    </div>
-  </div>
-
-  <!-- STORY -->
-  <section class="story">
-    <p>Entiendo perfectamente lo que estás pensando: <em>"¿Por qué a los demás les resulta más fácil?"</em> o <em>"Ya intenté cambiar mil veces y nada."</em></p>
-    <p>Pero déjame decirte algo: el problema <span class="highlight">no es tu fuerza de voluntad</span>. El problema es que nadie te enseñó a romper los patrones que te frenan.</p>
-    <p>Yo pasé años atrapado en el mismo ciclo: arrancar con fuerza, perder el ritmo, volver a empezar. Hasta que entendí algo fundamental:</p>
-    <p class="big-close">El éxito exterior es un reflejo de lo que pasa dentro de ti.</p>
-    <p style="margin-top:1rem;">Desarrollé un método claro para romper ese ciclo. Y hoy ese mismo método es <span class="bold">Reconstrucción 90</span>, el programa que quiero compartir contigo.</p>
-    <p>Si estás listo para dejar de repetir los mismos errores, <span class="red-text">este es tu momento.</span></p>
-  </section>
-
-  <!-- BTN INTERMEDIO -->
-  <div style="padding: 0 1.5rem 2rem; background:#000;">
-    <a href="https://wa.link/qf73k8" class="btn-main">AGENDA TU PLÁTICA GRATUITA</a>
-    <p class="btn-hint">Cupos limitados cada semana</p>
-  </div>
-
-  <!-- PROBLEMS -->
-  <section class="problems">
-    <h2 class="section-title">¿Te identificas<br>con esto?</h2>
-    <div class="problem-item">
-      <div class="problem-label"><div class="prob-icon">✕</div><h3>Sabes lo que debes hacer pero no lo haces</h3></div>
-      <p class="problem-desc">Tienes la información, el conocimiento, incluso las ganas... pero a la hora de la verdad, algo te frena siempre.</p>
-    </div>
-    <div class="problem-item">
-      <div class="problem-label"><div class="prob-icon">✕</div><h3>Empiezas fuerte y a los días ya perdiste el ritmo</h3></div>
-      <p class="problem-desc">El lunes arrancas motivado. El viernes ya volviste a tus viejos hábitos. Y el ciclo se repite.</p>
-    </div>
-    <div class="problem-item">
-      <div class="problem-label"><div class="prob-icon">✕</div><h3>Te prometes cambiar... y vuelves al mismo patrón</h3></div>
-      <p class="problem-desc">No es falta de voluntad. Son patrones mentales que operan en piloto automático sin que tú lo notes.</p>
-    </div>
-    <div class="problem-item">
-      <div class="problem-label"><div class="prob-icon">✕</div><h3>Te gustaría tener control real de tu vida</h3></div>
-      <p class="problem-desc">Quieres ser constante, respetarte a ti mismo y tomar decisiones desde la claridad, no desde el impulso o el miedo.</p>
-    </div>
-  </section>
-
-  <!-- INCLUDES -->
-  <section class="includes">
-    <h2 class="section-title">¿Por qué<br>Reconstrucción 90?</h2>
-    <div class="include-item">
-      <div class="inc-icon">🧠</div>
-      <p class="inc-title">Sistema de reprogramación mental</p>
-      <p class="inc-desc">Un método paso a paso para identificar y cortar los patrones que te sabotean, sin depender de motivación.</p>
-      <p class="inc-value">[Valor real: $500 USD]</p>
-    </div>
-    <div class="include-item">
-      <div class="inc-icon">📋</div>
-      <p class="inc-title">Ejercicios prácticos diarios</p>
-      <p class="inc-desc">No teoría. Acciones concretas cada día para construir disciplina real que dure más allá del programa.</p>
-      <p class="inc-value">[Valor real: $300 USD]</p>
-    </div>
-    <div class="include-item">
-      <div class="inc-icon">🤝</div>
-      <p class="inc-title">Acompañamiento directo conmigo</p>
-      <p class="inc-desc">No estás solo. Tendrás acceso directo a Alex durante los 90 días para resolver dudas y mantenerte en ruta.</p>
-      <p class="inc-value">[Valor real: $400 USD]</p>
-    </div>
-    <div class="include-item">
-      <div class="inc-icon">👥</div>
-      <p class="inc-title">Grupo privado de soporte</p>
-      <p class="inc-desc">Una comunidad de personas comprometidas con el mismo proceso que tú. El entorno lo cambia todo.</p>
-      <p class="inc-value">[Valor real: $200 USD]</p>
-    </div>
-  </section>
-
-  <!-- CTA FINAL PROGRAMA -->
-  <div class="cta-final">
-    <h2 class="section-title">Empieza tu<br>transformación hoy</h2>
-    <p>Esta plática es para ver si el programa es para ti. Sin presión, sin ventas agresivas. Solo una conversación honesta sobre tu situación.</p>
-    <a href="https://wa.link/qf73k8" class="btn-secondary">ESCRIBIR A ALEX<br>POR WHATSAPP</a>
-    <p class="btn-hint2">Cupos limitados · Respuesta en menos de 24 horas</p>
-  </div>
-
-  <!-- EBOOK SECCIÓN -->
-  <div class="ebook-divider">
-    <span class="tag">¿Aún no estás listo?</span>
-    <h2>Del Caos<br>a la Disciplina</h2>
-    <p>Empieza aquí. 7 capítulos con ejercicios reales para ordenar tu mente, romper el autosabotaje y construir disciplina desde cero.</p>
-    <div class="ebook-price"><span>$27 USD</span>$12 USD</div>
-    <a href="https://pay.hotmart.com/R104468228O?off=ohexo5he" class="btn-ebook">QUIERO EL EBOOK</a>
-  </div>
-
-  <footer>© 2026 Alex Martínez · alexfuentesmindset</footer>
 </div>
 
-<!-- ===== POPUP EBOOK ===== -->
+<div class="divider"></div>
+
+<!-- IDENTIFICACIÓN -->
+<section>
+  <div class="container">
+    <p class="section-label">¿Te identificas?</p>
+    <h2 class="section-title">Sabes lo que tienes<br>que hacer. Y aun así.</h2>
+    <div class="id-grid">
+      <div class="id-item">
+        <span class="id-x">×</span>
+        <p class="id-text">Arrancas con todo el lunes. El viernes volviste a tus viejos hábitos. El ciclo se repite.</p>
+      </div>
+      <div class="id-item">
+        <span class="id-x">×</span>
+        <p class="id-text">Tienes la información, el conocimiento, incluso las ganas — pero algo siempre te frena.</p>
+      </div>
+      <div class="id-item">
+        <span class="id-x">×</span>
+        <p class="id-text">Entornos que te destruyen: fiestas, alcohol, personas que no te suman. Y no sabes cómo salir.</p>
+      </div>
+      <div class="id-item">
+        <span class="id-x">×</span>
+        <p class="id-text">Quieres un cuerpo que admires, dirección en tu vida, respetarte a ti mismo. Solo no has podido sostenerte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HISTORIA PERSONAL — reemplaza testimonios -->
+<section class="historia">
+  <div class="container">
+    <p class="section-label">Por qué yo</p>
+    <div class="historia-inner">
+      <div class="historia-foto">
+        <p class="historia-foto-placeholder">Foto tuya<br>antes / después<br>o foto actual</p>
+      </div>
+      <div class="historia-content">
+        <p class="historia-quote">"Yo estuve exactamente donde estás tú ahorita."</p>
+        <div class="historia-body">
+          <p>Fiestas, alcohol, sin dirección. Un trabajo normal, entornos destructivos, y la sensación de que algo faltaba pero no sabía qué.</p>
+          <p>No fue motivación lo que me sacó. Fue entender los patrones que operaban en piloto automático — y romperlos uno por uno.</p>
+          <p>En el gym encontré el primer hilo. Construí un cuerpo. Luego vinieron los hábitos, la claridad, la dirección. Eliminé los vicios. Cambié los entornos.</p>
+          <p>Lo más importante: lo sigo manteniendo. No te vendo algo que leí — te enseño lo que yo mismo vivo.</p>
+        </div>
+        <div class="historia-firma">
+          <strong>Alex Fuentes</strong>
+          <span>Coach de Mindset & Disciplina · Tejupilco, México</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROGRAMA -->
+<section id="programa">
+  <div class="container">
+    <p class="section-label">El programa</p>
+    <h2 class="section-title">Reconstrucción 90<br>— lo que incluye</h2>
+    <div class="programa-grid">
+      <div class="programa-item">
+        <span class="programa-icon">🧠</span>
+        <h3>Sistema de reprogramación mental</h3>
+        <p>Identificas y cortas los patrones que te sabotean. Sin depender de motivación. Con estructura que se sostiene sola.</p>
+      </div>
+      <div class="programa-item">
+        <span class="programa-icon">📋</span>
+        <h3>Ejercicios prácticos diarios</h3>
+        <p>No teoría. Acciones concretas cada día para construir disciplina real que dure más allá del programa.</p>
+      </div>
+      <div class="programa-item">
+        <span class="programa-icon">🤝</span>
+        <h3>Acompañamiento directo conmigo</h3>
+        <p>Acceso directo a Alex durante los 90 días. No estás solo — tienes a alguien que ya recorrió el camino.</p>
+      </div>
+      <div class="programa-item">
+        <span class="programa-icon">👥</span>
+        <h3>Grupo privado de soporte</h3>
+        <p>Una comunidad de hombres comprometidos con el mismo proceso. El entorno lo cambia todo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRECIO -->
+<section class="precio">
+  <div class="container">
+    <p class="section-label" style="justify-content: center;">Inversión</p>
+    <h2 class="section-title" style="text-align: center;">Sin letra pequeña.<br>Sin sorpresas.</h2>
+    <div class="precio-card">
+      <span class="precio-badge">Precio de lanzamiento</span>
+      <p class="precio-nombre">Reconstrucción 90</p>
+      <p class="precio-duracion">Programa completo · 90 días</p>
+      <ul class="precio-lista">
+        <li>Sistema de reprogramación mental paso a paso</li>
+        <li>Ejercicios prácticos diarios</li>
+        <li>Acompañamiento directo con Alex — 90 días</li>
+        <li>Grupo privado de soporte</li>
+        <li>Acceso de por vida al material</li>
+      </ul>
+      <div class="precio-numero">$199</div>
+      <p class="precio-usd">USD · pago único</p>
+      <a href="https://wa.link/qf73k8" class="btn-primary" style="display: block; text-align: center;" target="_blank">Quiero aplicar al programa</a>
+      <p class="precio-nota">Primero hablamos 15 minutos. Si el programa es para ti, arrancamos.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PARA QUIÉN -->
+<section>
+  <div class="container">
+    <p class="section-label">Para quién es</p>
+    <h2 class="section-title">Esto no es para todos.<br>Y está bien.</h2>
+    <div class="paraquien-grid">
+      <div class="paraquien-si">
+        <p class="paraquien-titulo">Sí es para ti si</p>
+        <ul class="paraquien-lista">
+          <li>Tienes entre 20 y 32 años</li>
+          <li>Estás harto de repetir el mismo ciclo</li>
+          <li>Quieres un cuerpo que admires y dirección en tu vida</li>
+          <li>Estás dispuesto a trabajar 90 días en serio</li>
+          <li>Buscas salir de entornos que te destruyen</li>
+        </ul>
+      </div>
+      <div class="paraquien-no">
+        <p class="paraquien-titulo">No es para ti si</p>
+        <ul class="paraquien-lista">
+          <li>Buscas resultados sin esfuerzo</li>
+          <li>No estás listo para cuestionar tus patrones</li>
+          <li>Quieres motivación temporal, no cambio real</li>
+          <li>No puedes comprometerte con el proceso completo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2>¿Cuánto tiempo más<br>vas a <em>esperar?</em></h2>
+    <p>La plática es gratis. 15 minutos. Sin presión. Solo para ver si el programa es para ti.</p>
+    <a href="https://wa.link/qf73k8" class="btn-primary" target="_blank">Escribir a Alex por WhatsApp</a>
+  </div>
+</section>
+
+<!-- EBOOK POPUP -->
 <div class="popup-overlay" id="popup">
-  <div class="popup-box">
-    <button class="popup-close" id="popup-close">✕</button>
-    <span class="popup-tag">Antes de irte</span>
-    <h2 class="popup-title">Del Caos a la<br><span class="gold">Disciplina</span></h2>
-    <p class="popup-desc">Si el programa aún no es para ti, empieza con esto. 7 capítulos con ejercicios reales que te ayudan a ordenar tu mente desde hoy.</p>
-    <ul class="popup-includes">
+  <div class="popup-card">
+    <button class="popup-close" onclick="cerrarPopup()">✕</button>
+    <p class="popup-title">Del Caos a la Disciplina</p>
+    <p class="popup-sub">¿El programa aún no es el momento? Empieza aquí.</p>
+    <ul class="popup-lista">
       <li>Por qué el caos no es tu personalidad</li>
       <li>Cómo construir disciplina sin motivación</li>
       <li>Ejercicios prácticos por capítulo</li>
       <li>Cómo dejar de traicionarte a ti mismo</li>
-      <li>Tu nueva identidad paso a paso</li>
     </ul>
-    <div class="popup-price"><span class="old">$27 USD</span>$12 USD</div>
-    <a href="https://pay.hotmart.com/R104468228O?off=ohexo5he" class="btn-popup-buy">QUIERO EL EBOOK</a>
-    <p class="popup-skip" id="popup-skip">No, prefiero seguir sin cambiar</p>
+    <div class="popup-precio">
+      <span class="tachado">$27 USD</span>
+      <span class="real">$12 USD</span>
+    </div>
+    <a href="https://pay.hotmart.com/R104468228O?off=ohexo5he" class="btn-primary" style="display:block; text-align:center; margin-bottom: 0.75rem;" target="_blank">Quiero el ebook</a>
+    <p style="text-align:center; font-size:0.75rem; color: var(--gray-3); cursor:pointer;" onclick="cerrarPopup()">No, prefiero seguir sin cambiar</p>
   </div>
 </div>
 
+<footer>
+  © 2026 Alex Fuentes · alexfuentesmindset
+</footer>
+
 <script>
-  var popupShown = false;
-  var programClicked = false;
-
-  document.getElementById('btn-programa').addEventListener('click', function() {
-    programClicked = true;
-  });
-
-  function showPopup() {
-    if (!popupShown && !programClicked) {
-      popupShown = true;
-      document.getElementById('popup').classList.add('active');
-    }
-  }
-
-  // Mostrar popup si el usuario llega al fondo sin hacer clic en el programa
-  window.addEventListener('scroll', function() {
-    var scrolled = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
-    if (scrolled > 0.85) showPopup();
-  });
-
-  // Mostrar popup si el usuario intenta salir (mouseout en desktop)
+  let popupShown = false;
   document.addEventListener('mouseleave', function(e) {
-    if (e.clientY < 20) showPopup();
+    if (e.clientY < 10 && !popupShown) {
+      document.getElementById('popup').classList.add('active');
+      popupShown = true;
+    }
   });
-
-  // Mostrar popup a los 45 segundos si no hizo nada
-  setTimeout(function() { showPopup(); }, 45000);
-
-  document.getElementById('popup-close').addEventListener('click', function() {
+  setTimeout(function() {
+    if (!popupShown) {
+      document.getElementById('popup').classList.add('active');
+      popupShown = true;
+    }
+  }, 45000);
+  function cerrarPopup() {
     document.getElementById('popup').classList.remove('active');
-  });
-  document.getElementById('popup-skip').addEventListener('click', function() {
-    document.getElementById('popup').classList.remove('active');
-  });
+  }
   document.getElementById('popup').addEventListener('click', function(e) {
-    if (e.target === this) this.classList.remove('active');
+    if (e.target === this) cerrarPopup();
   });
 </script>
+
 </body>
 </html>
